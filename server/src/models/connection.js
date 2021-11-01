@@ -3,11 +3,11 @@ const { MongoClient } = require('mongodb');
 require('dotenv').config();
 
 const MONGO_DB_URL = `mongodb://${process.env.DB_HOST}:27017`;
-const DB_NAME = process.env.DB_NAME;
+const { DB_NAME } = process.env;
 
 let schema = null;
 
-async function connection() {
+async function getConnection() {
   if (schema) return Promise.resolve(schema);
   return MongoClient
     .connect(MONGO_DB_URL, {
@@ -24,4 +24,4 @@ async function connection() {
     });
 }
 
-module.exports = { connection };
+module.exports = { getConnection };
