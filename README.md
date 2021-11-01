@@ -1,2 +1,2 @@
-# desafio-t-cnico-Ebytr
+# desafio-tecnico-Ebytr
 Simulação de um desafio técnico proposto pela Trybe
