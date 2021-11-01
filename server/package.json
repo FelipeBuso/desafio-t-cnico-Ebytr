@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/FelipeBuso/desafio-tecnico-Ebytr#readme",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "joi": "^17.4.2",
