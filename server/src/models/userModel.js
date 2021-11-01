@@ -17,6 +17,15 @@ const createUser = async (user, userRole, userStatus) => {
   }
 };
 
+const findUserByEmail = async (userEmail) => {
+  const usersCollection = await getConnection()
+  .then((db) => db.collection('users'));
+  const user = await usersCollection
+    .findOne({ userEmail });
+  return user;
+};
+
 module.exports = {
   createUser,
+  findUserByEmail,
 };
