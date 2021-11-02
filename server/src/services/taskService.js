@@ -12,6 +12,15 @@ const findTasksByUserId = async (userId) => {
   return result;
 };
 
+const updateTask = async (id, newTaskdata) => {
+  if (!ObjectId.isValid(id)) {
+    return { code: 400, message: 'Tarefa não encontrada' };
+  }
+  const result = await TaskModel.updateTask(id, newTaskdata);
+  return result;
+};
+
 module.exports = {
   findTasksByUserId,
+  updateTask,
 };
