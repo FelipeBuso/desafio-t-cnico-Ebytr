@@ -39,8 +39,21 @@ const updateTask = async (id, newTaskData) => {
   }
 };
 
+const deleteTask = async (id) => {
+  try {
+    const tasksCollection = await getConnection()
+      .then((db) => db.collection('tasks'));
+    await tasksCollection
+      .deleteOne({ _id: ObjectId(id) });
+    return { code: 204 };
+  } catch (error) {
+    return errorServer;
+  }
+};
+
 module.exports = {
   createTask,
   findTasksByUserId,
   updateTask,
+  deleteTask,
 };

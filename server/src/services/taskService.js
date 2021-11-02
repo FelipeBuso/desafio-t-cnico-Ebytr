@@ -20,7 +20,16 @@ const updateTask = async (id, newTaskdata) => {
   return result;
 };
 
+const deleteTask = async (id) => {
+  if (!ObjectId.isValid(id)) {
+    return { code: 400, message: 'Tarefa não encontrada' };
+  }
+  const result = await TaskModel.deleteTask(id);
+  return result;
+};
+
 module.exports = {
   findTasksByUserId,
   updateTask,
+  deleteTask,
 };
