@@ -1,0 +1,6 @@
+.component-task {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  width: 90%;
+}
