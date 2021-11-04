@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import axios from 'axios';
 import '../styles/Login.css';
@@ -6,6 +7,16 @@ import '../styles/Login.css';
 export default function Login() {
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
+
+  useEffect(() => {
+    const userLocalStorage = localStorage.getItem('user');
+    const tokenLocalStorage = localStorage.getItem('token');
+    if (userLocalStorage !== null && tokenLocalStorage !== null) {
+      history.push('/tasks')
+    }
+  }, []);
+
+  const history = useHistory();
 
   const handleChangeEmail = ({ target }) => {
     const { value } = target;
@@ -21,15 +32,14 @@ export default function Login() {
     const { user, userToken } = data;
     localStorage.setItem('user', JSON.stringify(user));
     localStorage.setItem('token', JSON.stringify(userToken));
+    history.push('/tasks');
   }
 
   const getTokenUser = async () => {
     axios
       .post('http://localhost:3030/login', { userEmail, userPassword})
       .then((res) => saveUserLocalStorage(res.data))
-      // .then((result) => result.data)
-      .catch((error) => alert(error.message));
-
+      .catch((error) => alert(error.response.data.message));
   }
 
 
