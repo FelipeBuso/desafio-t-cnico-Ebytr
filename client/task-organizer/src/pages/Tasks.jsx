@@ -18,12 +18,7 @@ export default function Tasks() {
       .catch((error) => alert(error.response.data));
     setIsLoading(false);
   },[]);
-
-  // const compareData = (a, b) => {
-  //   if (a < b) return -1;
-  //   if (a > b) return 1;
-  //   return 0;
-  // }
+  
   const sortTasks = () => {
     let ordenedTasks = []
     if (!sortDirection) {
