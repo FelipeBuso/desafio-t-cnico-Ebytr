@@ -5,8 +5,8 @@ import '../styles/Tasks.css';
 
 export default function Tasks() {
   const [tasks, setTasks] = useState([]);
-  const [ isLoading, setIsLoading] = useState(true);
-  const [sortBy, setSortBy] = useState('creationDate')
+  const [isLoading, setIsLoading] = useState(true);
+  const [sortBy, setSortBy] = useState('taskCreationDate')
   const [sortDirection, setSortDirection] = useState(true)
 
   useEffect(() => {
@@ -19,12 +19,24 @@ export default function Tasks() {
     setIsLoading(false);
   },[]);
 
-  console.log(sortBy);
-  console.log(sortDirection);
-
-  // const sortTask = () => {
-
+  // const compareData = (a, b) => {
+  //   if (a < b) return -1;
+  //   if (a > b) return 1;
+  //   return 0;
   // }
+  const sortTasks = () => {
+    let ordenedTasks = []
+    if (!sortDirection) {
+      ordenedTasks = tasks.sort((a,b) => a[sortBy].localeCompare(b[sortBy]))
+    } else {
+      ordenedTasks = tasks.sort((b, a) => a[sortBy].localeCompare(b[sortBy]))
+    }
+    setTasks(ordenedTasks);
+  }
+
+  useEffect(() => {
+    sortTasks();
+  }, [sortBy, sortDirection]);
 
   return (
     <div className="section-tasks">
@@ -50,9 +62,9 @@ export default function Tasks() {
       </div>
       <nav className="div-side-nav">
         <div className="sort-options d-grid gap-2">
-          <button className="btn btn-primary" type="button" onClick={ () => setSortBy('creationDate') }>Data de Criação</button>
-          <button className="btn btn-primary" type="button" onClick={ () => setSortBy('task') }>Tarefa</button>
-          <button className="btn btn-primary" type="button" onClick={ () => setSortBy('status') }>Status</button>
+          <button className="btn btn-primary" type="button" onClick={ () => setSortBy('taskCreationDate') }>Data de Criação</button>
+          <button className="btn btn-primary" type="button" onClick={ () => setSortBy('taskTitle') }>Tarefa</button>
+          <button className="btn btn-primary" type="button" onClick={ () => setSortBy('taskStatus') }>Status</button>
         </div>
         <div className="sort-direction d-grid gap-2 d-md-block">
           <button className="btn btn-primary" type="button" onClick={ () => setSortDirection(true) }>Crescente</button>

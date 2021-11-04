@@ -1,0 +1,14 @@
+.create-account-section {
+  width: 100%;
+}
+
+.create-account-inputs {
+  align-items: center;
+  border: 1px solid gray;
+  border-radius: 6px;
+  display: flex;
+  flex-flow: column wrap;
+  margin: 150px auto;
+  padding: 40px;
+  width: 40%;
+}
