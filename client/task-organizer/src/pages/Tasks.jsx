@@ -15,15 +15,16 @@ export default function Tasks() {
     axios
       .get(`http://localhost:3030/tasks/${userId}`, { headers: header })
       .then((res) => setTasks(res.data))
-      .catch((error) => console.log(error.message));
+      .catch((error) => console.log(error));
     setIsLoading(false);
   },[]);
 
   console.log(sortBy);
+  console.log(sortDirection);
 
-  const sortTask = () => {
-    
-  }
+  // const sortTask = () => {
+
+  // }
 
   return (
     <div className="section-tasks">
