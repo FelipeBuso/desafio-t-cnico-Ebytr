@@ -15,7 +15,7 @@ export default function Tasks() {
     axios
       .get(`http://localhost:3030/tasks/${userId}`, { headers: header })
       .then((res) => setTasks(res.data))
-      .catch((error) => console.log(error));
+      .catch((error) => alert(error.response.data));
     setIsLoading(false);
   },[]);
 

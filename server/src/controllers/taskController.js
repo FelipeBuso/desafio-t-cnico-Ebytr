@@ -11,8 +11,8 @@ const createTask = async (req, res) => {
 };
 
 const findTasksByUserId = async (req, res) => {
-  const { userId } = req.body;
-  const result = await TaskService.findTasksByUserId(userId);
+  const { id } = req.params;
+  const result = await TaskService.findTasksByUserId(id);
   if (result.message) {
     return res.status(result.code).json({ message: result.message });
   }
