@@ -28,7 +28,7 @@ export default function Login() {
       .post('http://localhost:3030/login', { userEmail, userPassword})
       .then((res) => saveUserLocalStorage(res.data))
       // .then((result) => result.data)
-      .catch((error) => console.log(error.message));
+      .catch((error) => alert(error.message));
 
   }
 
