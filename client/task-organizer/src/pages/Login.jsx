@@ -28,10 +28,10 @@ export default function Login() {
     setUserPassword(value);
   }
 
-  const saveUserLocalStorage = (data) => {
+  const saveUserLocalStorage = async (data) => {
     const { user, userToken } = data;
-    localStorage.setItem('user', JSON.stringify(user));
-    localStorage.setItem('token', JSON.stringify(userToken));
+    await localStorage.setItem('token', JSON.stringify(userToken));
+    await localStorage.setItem('user', JSON.stringify(user));
     history.push('/tasks');
   }
 
@@ -46,7 +46,7 @@ export default function Login() {
   return (
     <section className="section-login">
       <div className="div-input-login">
-        <p className="h2">Login</p>
+        <p className="h2">LOGIN</p>
         <div className="input-group mb-3">
         <span className="input-group-text">email</span>
         <input
@@ -67,7 +67,10 @@ export default function Login() {
           onChange={ (e) => handleChangePassword (e) }
         />
         </div>
-        <button type="button" className="btn btn-primary" onClick={ getTokenUser }>LOGIN</button>
+        <div className="div-login-butons">
+          <button type="button" className="btn btn-success" onClick={ getTokenUser }>LOGIN</button>
+          <button type="button" className="btn btn-outline-primary" onClick={ () => history.push('/create') }>CRIAR CONTA</button>
+        </div>
       </div>
     </section>
   )
