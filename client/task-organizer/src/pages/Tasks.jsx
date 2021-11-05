@@ -64,6 +64,7 @@ export default function Tasks() {
         }
       </div>
       <nav className="div-side-nav">
+        <p className="h4">ORDENAR</p>
         <div className="sort-options d-grid gap-2">
           <button
             className="btn btn-outline-primary"

@@ -25,7 +25,7 @@ export default function Task({ task }) {
       <p className="lead">{ task.taskStatus }</p>
       <p className="lead">{ task.taskForecastDate }</p>
       <div className="div-button">
-        <button className="btn btn-warning">EDITAR</button>
+        <button className="btn btn-warning" onClick={ () => history.push(`/tasks/${task._id}`)}>EDITAR</button>
         <button className="btn btn-danger" onClick={ () => excludeTask() }>EXCLUIR</button>
       </div>
     </div>
