@@ -28,10 +28,10 @@ export default function Login() {
     setUserPassword(value);
   }
 
-  const saveUserLocalStorage = (data) => {
+  const saveUserLocalStorage = async (data) => {
     const { user, userToken } = data;
-    localStorage.setItem('user', JSON.stringify(user));
-    localStorage.setItem('token', JSON.stringify(userToken));
+    await localStorage.setItem('token', JSON.stringify(userToken));
+    await localStorage.setItem('user', JSON.stringify(user));
     history.push('/tasks');
   }
 

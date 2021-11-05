@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import Task from '../components/Task';
 import '../styles/Tasks.css';
@@ -8,6 +9,8 @@ export default function Tasks() {
   const [isLoading, setIsLoading] = useState(true);
   const [sortBy, setSortBy] = useState('taskCreationDate')
   const [sortDirection, setSortDirection] = useState(true)
+
+  const history = useHistory();
 
   useEffect(() => {
     const header = { Authorization: JSON.parse(localStorage.getItem('token'))}
@@ -33,6 +36,11 @@ export default function Tasks() {
     sortTasks();
   }, [sortBy, sortDirection]);
 
+  const sortDataTask = (order) => {
+    setSortBy(order);
+    setSortDirection(!sortDirection);
+  }
+
   return (
     <div className="section-tasks">
       <div className="div-titles-tasks">
@@ -57,14 +65,30 @@ export default function Tasks() {
       </div>
       <nav className="div-side-nav">
         <div className="sort-options d-grid gap-2">
-          <button className="btn btn-primary" type="button" onClick={ () => setSortBy('taskCreationDate') }>Data de Criação</button>
-          <button className="btn btn-primary" type="button" onClick={ () => setSortBy('taskTitle') }>Tarefa</button>
-          <button className="btn btn-primary" type="button" onClick={ () => setSortBy('taskStatus') }>Status</button>
+          <button
+            className="btn btn-outline-primary"
+            type="button"
+            onClick={ () => sortDataTask('taskCreationDate') }
+            >Data de Criação { !sortDirection && sortBy==='taskCreationDate' ? <>&uarr;</> :  <>&darr;</> }
+          </button>
+          <button
+            className="btn btn-outline-primary"
+            type="button"
+            onClick={ () => sortDataTask('taskTitle') }
+            >Tarefa { !sortDirection && sortBy==='taskTitle' ? <>&uarr;</> :  <>&darr;</> }
+          </button>
+          <button
+            className="btn btn-outline-primary"
+            type="button"
+            onClick={ () => sortDataTask('taskStatus') }
+            >Status { !sortDirection && sortBy==='taskStatus' ? <>&uarr;</> :  <>&darr;</> }
+          </button>
         </div>
         <div className="sort-direction d-grid gap-2 d-md-block">
-          <button className="btn btn-primary" type="button" onClick={ () => setSortDirection(true) }>Crescente</button>
-          <button className="btn btn-primary" type="button" onClick={ () => setSortDirection(false) }>Descrescente</button>
+          {/* <button className="btn btn-outline-primary" type="button" onClick={ () => setSortDirection(true) }>Crescente</button>
+          <button className="btn btn-outline-primary" type="button" onClick={ () => setSortDirection(false) }>Descrescente</button> */}
         </div>
+        <button type="button" className="btn btn-success" onClick={ () => history.push('/task') }>ADICIONAR TAREFA</button>
       </nav>
     </div>
   )
