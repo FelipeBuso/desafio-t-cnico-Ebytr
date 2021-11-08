@@ -3,10 +3,10 @@ const TaskModel = require('../models/taskModel');
 
 const findTasksByUserId = async (userId) => {
   if (!ObjectId.isValid(userId)) {
-    return { code: 400, message: 'Usuário não encontrado.' };
+    return { code: 400, message: 'Id inválido.' };
   }
   const result = await TaskModel.findTasksByUserId(userId);
-  if (result === null) {
+  if (result.tasks === null) {
     return { code: 204, message: 'Nenhuma tarefa cadastrada.' };
   }
   return result;
@@ -28,8 +28,20 @@ const deleteTask = async (id) => {
   return result;
 };
 
+const findTaskById = async (id) => {
+  if (!ObjectId.isValid(id)) {
+    return { code: 400, message: 'Id inválido.' };
+  }
+  const result = await TaskModel.findTaskById(id);
+  if (result.task === null) {
+    return { code: 204, message: 'Tarefa não encontrada.' };
+  }
+  return result;
+};
+
 module.exports = {
   findTasksByUserId,
   updateTask,
   deleteTask,
+  findTaskById,
 };

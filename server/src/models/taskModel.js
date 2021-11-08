@@ -51,9 +51,22 @@ const deleteTask = async (id) => {
   }
 };
 
+const findTaskById = async (id) => {
+  try {
+    const tasksCollection = await getConnection()
+      .then((db) => db.collection('tasks'));
+    const taskById = await tasksCollection
+      .find({ _id: ObjectId(id) }).toArray();
+    return { code: 200, task: taskById };
+  } catch (error) {
+    return errorServer;
+  }
+};
+
 module.exports = {
   createTask,
   findTasksByUserId,
   updateTask,
   deleteTask,
+  findTaskById,
 };
